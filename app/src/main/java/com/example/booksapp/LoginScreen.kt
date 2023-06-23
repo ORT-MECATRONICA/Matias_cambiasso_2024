@@ -9,6 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import androidx.navigation.Navigation.findNavController
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 
 class LoginScreen : Fragment() {
@@ -22,6 +25,7 @@ class LoginScreen : Fragment() {
     private lateinit var userWritten: EditText
     private lateinit var passWritten: EditText
     private lateinit var confirmButton: Button
+    private lateinit var signInButton: Button
     private var usersList: MutableList<User> = mutableListOf()
 
     lateinit var userValue: String
@@ -36,6 +40,7 @@ class LoginScreen : Fragment() {
         userWritten = v.findViewById(R.id.editUser)
         passWritten = v.findViewById(R.id.editPass)
         confirmButton = v.findViewById(R.id.loginButton)
+        signInButton = v.findViewById(R.id.createUserButton)
         return v
     }
 
@@ -57,7 +62,9 @@ class LoginScreen : Fragment() {
             if (userEncontrado != null) {
                 if (userEncontrado.password == myPassword) {
                     Snackbar.make(v, "Login successful", Snackbar.LENGTH_SHORT).show()
-
+                    //val action = LoginScreentDirections.actionLoginScreenToBookListFragment()
+                    //findNavController().navigate(action)
+                    view?.findNavController()?.navigate(R.id.action_loginScreen_to_bookListFragment)
                 } else {
                     Snackbar.make(v, "Username or password incorrect", Snackbar.LENGTH_SHORT).show()
                 }
@@ -70,6 +77,10 @@ class LoginScreen : Fragment() {
                 Snackbar.make(v, "Please insert your Username and Password", Snackbar.LENGTH_SHORT)
                     .show()
             }
+        }
+
+        signInButton.setOnClickListener {
+            view?.findNavController()?.navigate(R.id.action_loginScreen_to_createUserFragment)
         }
     }
 }

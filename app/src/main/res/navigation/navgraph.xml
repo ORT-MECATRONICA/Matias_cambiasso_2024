@@ -16,5 +16,13 @@
         <action
             android:id="@+id/action_loginScreen_to_bookListFragment"
             app:destination="@id/bookListFragment" />
+        <action
+            android:id="@+id/action_loginScreen_to_createUserFragment"
+            app:destination="@id/createUserFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/createUserFragment"
+        android:name="com.example.booksapp.CreateUserFragment"
+        android:label="fragment_create_user"
+        tools:layout="@layout/fragment_create_user" />
 </navigation>
