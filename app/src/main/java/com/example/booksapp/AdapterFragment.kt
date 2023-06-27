@@ -15,6 +15,7 @@ class BooksAdapter(
 
     class BooksHolder (v: View) : RecyclerView.ViewHolder(v) {
         private var view: View
+        private lateinit var viewModelBookList: BookListViewModel
 
         init {
             this.view = v
@@ -40,6 +41,7 @@ class BooksAdapter(
         holder.getItem().setOnClickListener {
             print("Click en titulo")
             onClick(booksList[position])
+
         }
     }
 
