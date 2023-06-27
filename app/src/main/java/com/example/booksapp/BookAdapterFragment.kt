@@ -1,21 +1,24 @@
 package com.example.booksapp
 
+import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 
-class BooksAdapter(
+
+class BookAdapterFragment(
     var booksList: MutableList<Books>,
     var onClick: (Books) -> Unit
-
-) : RecyclerView.Adapter<BooksAdapter.BooksHolder>() {
-
+) : RecyclerView.Adapter<BookAdapterFragment.BooksHolder>() {
+    private lateinit var viewModelBookList: BookListViewModel
     class BooksHolder (v: View) : RecyclerView.ViewHolder(v) {
         private var view: View
-        private lateinit var viewModelBookList: BookListViewModel
+
 
         init {
             this.view = v
@@ -37,10 +40,13 @@ class BooksAdapter(
     }
 
     override fun onBindViewHolder(holder: BooksHolder, position: Int) {
+        viewModelBookList = ViewModelProvider(requireActivity()).get(BookListViewModel::class.java)
+        //NO SE PORQUE ESTO TIRA ERROR
         holder.setTitle(booksList[position].title)
         holder.getItem().setOnClickListener {
-            print("Click en titulo")
+            print("Click en título")
             onClick(booksList[position])
+            viewModelBookList.repoPosition = position
 
         }
     }

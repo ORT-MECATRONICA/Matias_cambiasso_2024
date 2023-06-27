@@ -23,6 +23,7 @@ class CreateUserFragment : Fragment() {
     private lateinit var username: EditText
     private lateinit var password: EditText
     private lateinit var createButton: Button
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

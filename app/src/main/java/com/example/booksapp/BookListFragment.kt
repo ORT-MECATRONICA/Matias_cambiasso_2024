@@ -39,7 +39,7 @@ class BookListFragment : Fragment() {
 
         recBooks.layoutManager  = LinearLayoutManager(context)
 
-        recBooks.adapter = BooksAdapter(repository.getBooks()){ Books ->
+        recBooks.adapter = BookAdapterFragment(repository.getBooks()){ Books ->
                 Snackbar.make(v, Books.title, Snackbar.LENGTH_SHORT ).show()
 
         }
