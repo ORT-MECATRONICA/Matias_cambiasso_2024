@@ -26,10 +26,6 @@ class LoginScreen : Fragment() {
     private lateinit var passWritten: EditText
     private lateinit var confirmButton: Button
     private lateinit var signInButton: Button
-    private var usersList: MutableList<User> = mutableListOf()
-
-    lateinit var userValue: String
-    lateinit var passValue: String
 
     @SuppressLint("ResourceType")
     override fun onCreateView(
@@ -49,21 +45,19 @@ class LoginScreen : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(LoginScreenViewModel::class.java)
 
-        usersList.add(User("admin", "admin"))
-        usersList.add(User("isabella", "isalol"))
-        usersList.add(User("sol", "sollol"))
+        viewModel.usersList.add(User("admin", "admin"))
+        viewModel.usersList.add(User("isabella", "isalol"))
+        viewModel.usersList.add(User("sol", "sollol"))
 
         confirmButton.setOnClickListener {
             val myUser: String = userWritten.text.toString()
             val myPassword: String = passWritten.text.toString()
 
-            var userEncontrado: User? = usersList.find { u -> u.username == myUser }
+            var userFound: User? = viewModel.usersList.find { u -> u.username == myUser }
 
-            if (userEncontrado != null) {
-                if (userEncontrado.password == myPassword) {
+            if (userFound != null) {
+                if (userFound.password == myPassword) {
                     Snackbar.make(v, "Login successful", Snackbar.LENGTH_SHORT).show()
-                    //val action = LoginScreentDirections.actionLoginScreenToBookListFragment()
-                    //findNavController().navigate(action)
                     view?.findNavController()?.navigate(R.id.action_loginScreen_to_bookListFragment)
                 } else {
                     Snackbar.make(v, "Username or password incorrect", Snackbar.LENGTH_SHORT).show()
