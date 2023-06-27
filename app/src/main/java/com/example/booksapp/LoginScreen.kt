@@ -43,7 +43,7 @@ class LoginScreen : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(LoginScreenViewModel::class.java)
+        viewModel = ViewModelProvider(requireActivity()).get(LoginScreenViewModel::class.java)
 
         viewModel.usersList.add(User("admin", "admin"))
         viewModel.usersList.add(User("isabella", "isalol"))
