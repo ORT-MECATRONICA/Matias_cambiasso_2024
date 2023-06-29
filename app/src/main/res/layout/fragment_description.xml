@@ -10,13 +10,14 @@
         android:id="@+id/titleBook"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="145dp"
-        android:layout_marginBottom="541dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginBottom="400dp"
         android:background="#9C27B0"
         android:backgroundTint="#FFFFFF"
         android:fontFamily="sans-serif-condensed"
         android:shadowColor="#9C27B0"
         android:text="TextView"
+        android:textAlignment="center"
         android:textAllCaps="true"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="#9C27B0"
@@ -26,19 +27,22 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/descriptionBook"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="115dp"
-        android:layout_marginBottom="406dp"
+        android:layout_marginTop="219dp"
+        android:layout_marginBottom="340dp"
         android:text="TextView"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titleBook" />
 </androidx.constraintlayout.widget.ConstraintLayout>
