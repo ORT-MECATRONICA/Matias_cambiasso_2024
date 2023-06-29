@@ -36,11 +36,8 @@ class DescriptionFragment : Fragment() {
         viewModel = ViewModelProvider(requireActivity()).get(DescriptionViewModel::class.java)
         viewModelBookList = ViewModelProvider(requireActivity()).get(BookListViewModel::class.java)
 
-
-        /*recBooks.adapter = BooksAdapter(repository.getBooks()){ Books ->
-            Snackbar.make(v, Books.title, Snackbar.LENGTH_SHORT ).show()
-
-        }*/
+        title.text = viewModelBookList.bookTitle
+        description.text = viewModelBookList.bookDescription
 
     }
 
