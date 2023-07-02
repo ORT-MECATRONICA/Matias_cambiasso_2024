@@ -17,11 +17,13 @@ class CreateUserFragment : Fragment() {
         fun newInstance() = CreateUserFragment()
     }
 
-    private lateinit var viewModel: CreateUserViewModel
+    private lateinit var viewModelSignIn: CreateUserViewModel
+    private lateinit var viewModelLogin : LoginScreenViewModel
     private lateinit var v : View
     private lateinit var username: EditText
     private lateinit var password: EditText
     private lateinit var createButton: Button
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -35,20 +37,29 @@ class CreateUserFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(CreateUserViewModel::class.java)
+        viewModelSignIn = ViewModelProvider(requireActivity()).get(CreateUserViewModel::class.java)
+        viewModelLogin = ViewModelProvider(requireActivity()).get(LoginScreenViewModel::class.java)
 
         createButton.setOnClickListener {
-            val myUser: String = username.text.toString()
-            val myPassword: String = password.text.toString()
+            val newUser: String = username.text.toString()
+            val newPass: String = password.text.toString()
 
-            if (myUser.isEmpty() || myPassword.isEmpty()) {
-                Snackbar.make(v, "Please insert your Username and Password", Snackbar.LENGTH_SHORT)
-                    .show()
+            print(newUser)
+            print(newPass)
+            var userExists: User? = viewModelLogin.usersList.find { u -> u.username == newUser }
+            //INCLUSO SI COMENTO TODO Y ESTA LISTA QUEDA DESCOMENTADA SE CIERRA
+            if (newUser.isEmpty() || newPass.isEmpty()) {
+                Snackbar.make(v, "Please insert your Username and Password", Snackbar.LENGTH_SHORT).show()
+            }
+            else if (userExists != null) {
+                Snackbar.make(v, "That username already exists", Snackbar.LENGTH_SHORT).show()
             }
             else {
-                //HAY QUE VER COMO HACER PARA SUMAR ESTO A LA LISTA DE USUARIOS
-                Snackbar.make(v, "Insert username", Snackbar.LENGTH_SHORT).show()
-                view?.findNavController()?.navigate(R.id.action_createUserFragment_to_bookListFragment)
+                viewModelLogin.usersList.add(User(newUser, newPass))
+                //LO QUE ESTA PASANDO CREO QUE ES QUE NO RECONOCE LAS VARIABLES COMO STRINGS
+                Snackbar.make(v, "User created", Snackbar.LENGTH_SHORT).show()
+                print("user created")
+                view?.findNavController()?.navigate(R.id.action_createUserFragment_to_loginScreen)
             }
         }
     }

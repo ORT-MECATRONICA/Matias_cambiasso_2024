@@ -1,19 +1,25 @@
 package com.example.booksapp
 
+import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 
-class BooksAdapter(
+
+class BookAdapter(
     var booksList: MutableList<Books>,
     var onClick: (Books) -> Unit
-) : RecyclerView.Adapter<BooksAdapter.BooksHolder>() {
-
+) : RecyclerView.Adapter<BookAdapter.BooksHolder>() {
     class BooksHolder (v: View) : RecyclerView.ViewHolder(v) {
         private var view: View
+
+
         init {
             this.view = v
         }
@@ -36,7 +42,7 @@ class BooksAdapter(
     override fun onBindViewHolder(holder: BooksHolder, position: Int) {
         holder.setTitle(booksList[position].title)
         holder.getItem().setOnClickListener {
-            print("Click en titulo")
+            print("Click en título")
             onClick(booksList[position])
         }
     }

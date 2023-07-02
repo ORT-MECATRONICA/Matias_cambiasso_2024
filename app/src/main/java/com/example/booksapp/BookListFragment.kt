@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
@@ -39,15 +40,16 @@ class BookListFragment : Fragment() {
 
         recBooks.layoutManager  = LinearLayoutManager(context)
 
-        recBooks.adapter = BooksAdapter(repository.getBooks()){ Books ->
-                Snackbar.make(v, Books.title, Snackbar.LENGTH_SHORT ).show()
-
+        recBooks.adapter = BookAdapter(repository.getBooks()){ Books ->
+                viewModel.bookDescription = Books.description
+                viewModel.bookTitle = Books.title
+                view?.findNavController()?.navigate(R.id.action_bookListFragment_to_descriptionFragment)
         }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(BookListViewModel::class.java)
+        viewModel = ViewModelProvider(requireActivity()).get(BookListViewModel::class.java)
         // TODO: Use the ViewModel
     }
 }
